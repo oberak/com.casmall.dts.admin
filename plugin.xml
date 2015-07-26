@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            icon="icons/alt_window_16.gif">
+         <run
+               class="com.casmall.dts.admin.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="com.casmall.dts.admin.Perspective"
+            id="com.casmall.dts.print.perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.casmall.dts.admin.print.editor.PrintWizardEditor"
+            contributorClass="com.casmall.dts.admin.print.actions.PrintWizardEditorActionBarContributor"
+            default="true"
+            id="com.casmall.dts.admin.print.editor.PrintWizardEditor"
+            name="출력환경">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            class="com.casmall.dts.admin.export.PrintExportWizard"
+            id="com.casmall.dts.admin.export.PrintExportWizard"
+            name="인쇄설정 export">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.casmall.dts.admin.application"
+            name="com.casmall.dts.admin">
+         <property
+               name="appName"
+               value="com.casmall.dts.admin">
+         </property>
+         <property
+               name="aboutImage"
+               value="icons/alt_about.gif">
+         </property>
+         <property
+               name="aboutText"
+               value="%aboutText">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.splashHandlers">
+      <splashHandler
+            class="com.casmall.dts.admin.splashHandlers.InteractiveSplashHandler"
+            id="com.casmall.dts.admin.splashHandlers.interactive">
+      </splashHandler>
+      <splashHandlerProductBinding
+            productId="com.casmall.dts.admin.product"
+            splashId="com.casmall.dts.admin.splashHandlers.interactive">
+      </splashHandlerProductBinding>
+   </extension>
+
+</plugin>

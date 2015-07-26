@@ -1,0 +1,14 @@
+0. 실행파일 생성 전 준비사항
+  - db.properties 파일 수정 : 
+    url=jdbc:hsqldb:file:../Dts2/db/dts2.db
+
+1. export
+  installer/Dts2Admin 폴더 삭제
+  product > overview > Eclipse product export wizard
+
+2. installer 컴파일(NSIS 필요)
+  2.1 Dts2Installer.nsi 컴파일
+    - dll 등은 copy 폴더에 있음.
+  2.2 Dts2Installer.exe 테스트
+
+root/happy

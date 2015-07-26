@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 인증 관리 -->
+<mapper namespace="com.casmall.dts.biz.dao.AuthMgtDAO">
+    <!-- 인증정보 조회 -->
+    <select id="selectTsAuthMgt" parameterType="com.casmall.dts.biz.domain.TsAuthMgtDTO" resultType="com.casmall.dts.biz.domain.TsAuthMgtDTO">
+        SELECT auth_seq, auth_key, auth_num, cst_nm, cst_tel, 
+		       nt, del_yn, rgn_dt, rgn_id
+		  FROM ts_auth_mgt 
+		 WHERE del_yn = 'N'
+        <if test="auth_seq != 0 ">
+           AND auth_seq = #{auth_seq}
+        </if>
+        <if test="search != null ">
+           AND (auth_key LIKE '%'||#{search}||'%'
+                OR cst_nm LIKE '%'||#{search}||'%'
+                OR cst_tel LIKE '%'||#{search}||'%'
+                OR nt LIKE '%'||#{search}||'%'
+               )
+        </if>
+         ORDER BY rgn_dt DESC
+    </select>
+    
+        <!-- 코드 채번 -->
+    <select id="selectTsAuthMgtKey" resultType="Long">
+        SELECT COALESCE(MAX(auth_seq),0)+1
+          FROM ts_auth_mgt
+    </select>
+    
+    <!-- 인증정보 등록 -->
+    <insert id="insertTsAuthMgt" parameterType="com.casmall.dts.biz.domain.TsAuthMgtDTO">
+		INSERT INTO ts_auth_mgt
+		            (auth_seq, auth_key, auth_num, cst_nm, cst_tel, 
+		            nt, del_yn, rgn_dt, rgn_id, edt_dt, edt_id)
+		     VALUES (#{auth_seq}, #{auth_key}, #{auth_num}, #{cst_nm}, #{cst_tel}, 
+		            #{nt}, #{del_yn}, #{rgn_dt}, #{rgn_id}, #{edt_dt}, #{edt_id})
+    </insert>
+    
+    <!-- 인증정보 수정 -->
+    <update id="updateTsAuthMgt" parameterType="com.casmall.dts.biz.domain.TsAuthMgtDTO">
+        UPDATE ts_auth_mgt 
+           SET 
+           <if test="auth_key != null ">
+               auth_key = #{auth_key}, 
+           </if>
+           <if test="auth_num != null ">
+               auth_num = #{auth_num},
+           </if>
+           <if test="cst_nm != null ">
+               cst_nm = #{cst_nm}, 
+           </if>
+           <if test="cst_tel != null ">
+               cst_tel = #{cst_tel}, 
+           </if>
+           <if test="nt != null ">
+               nt = #{nt}, 
+           </if>
+           <if test="del_yn != null ">
+               del_yn = #{del_yn},
+           </if>
+               edt_dt = #{edt_dt}, 
+               edt_id = #{edt_id}
+         WHERE auth_seq = #{auth_seq}
+    </update>
+</mapper>
