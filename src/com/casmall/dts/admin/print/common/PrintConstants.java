@@ -16,4 +16,7 @@ public class PrintConstants {
 	public static final String IMG_FIX = "/icons/elements/fix.png";
 	public static final String IMG_FIX_LARGE = "/icons/elements/fix_large.png";
 	public static final String IMG_IMAGE = "/icons/elements/image.png";
+	
+	public static final String IMG_QRCODE = "/icons/elements/qrcode.png";
+	public static final String IMG_QRCODE_LARGE = "/icons/elements/qrcode_large.png";
 }

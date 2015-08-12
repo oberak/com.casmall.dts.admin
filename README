@@ -24,6 +24,7 @@ Object 추가 시
   - figure, propertyChange 수정
 4. XxxElementTreeEditPart 추가(통합검토)
   - model,getWidgetImage 수정
+  - icon 추가 (16x16, 24x24) in PrintConstants
 5. PrintWizardEditor 수정
   - getPaletteRoot
 6. PrintWizardEditorInput 수정

@@ -23,6 +23,7 @@ import com.casmall.dts.admin.print.model.DataBoxElement;
 import com.casmall.dts.admin.print.model.FixBoxElement;
 import com.casmall.dts.admin.print.model.LineElement;
 import com.casmall.dts.admin.print.model.PaperElement;
+import com.casmall.dts.admin.print.model.QRCodeElement;
 import com.casmall.dts.admin.print.model.TextBoxElement;
 import com.casmall.dts.biz.domain.TsPrtAttrDTO;
 import com.casmall.dts.biz.domain.TsPrtInfDTO;
@@ -90,6 +91,19 @@ public class PrintWizardEditorInput implements IEditorInput{
 					be.setBackgroundColor(new Color(null, PrintUtil.getRGB(pa.getBg_color())));
 					be.setBorderColor(new Color(null, PrintUtil.getRGB(pa.getLine_color())));
 					be.setBorder(pa.getTkn());
+					be.setId(""+pa.getAttr_seq());
+					
+					be.setLayout(layout );
+					be.setName(pa.getAttr_nm());
+					if(DTSConstants.FLAG_Y.equals(pa.getPrt_yn())){
+						be.setPrtYn(0);
+					}else{
+						be.setPrtYn(1);
+					}
+					paper.addChlid(be);
+				}else if(DTSConstants.CD_ATTR_FLAG_QRCODE.equals(pa.getAttr_flg_cd())){
+					QRCodeElement be = new QRCodeElement();
+					be.setBorderColor(new Color(null, PrintUtil.getRGB(pa.getLine_color())));
 					be.setId(""+pa.getAttr_seq());
 					
 					be.setLayout(layout );
@@ -358,6 +372,21 @@ public class PrintWizardEditorInput implements IEditorInput{
 				dto.setFont_color("");
 				dto.setLine_color(convert(be.getBorderColor()));
 				dto.setTkn(be.getBorder());
+				if(be.getPrtYn()==0)
+					dto.setPrt_yn(DTSConstants.FLAG_Y);
+				else
+					dto.setPrt_yn(DTSConstants.FLAG_N);
+				dto.setStyle(0);
+			}else if(e instanceof QRCodeElement){
+				QRCodeElement be = (QRCodeElement)e;
+
+				dto.setAttr_flg_cd(DTSConstants.CD_ATTR_FLAG_QRCODE);
+				dto.setAttr_cd("");
+				dto.setData_fmt("");
+				dto.setData_type_cd("");
+				dto.setFont("");
+				dto.setFont_color("");
+				dto.setLine_color(convert(be.getBorderColor()));
 				if(be.getPrtYn()==0)
 					dto.setPrt_yn(DTSConstants.FLAG_Y);
 				else

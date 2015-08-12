@@ -75,6 +75,7 @@ import com.casmall.dts.admin.print.model.ElementCreationFactory;
 import com.casmall.dts.admin.print.model.FixBoxElement;
 import com.casmall.dts.admin.print.model.LineElement;
 import com.casmall.dts.admin.print.model.PaperElement;
+import com.casmall.dts.admin.print.model.QRCodeElement;
 import com.casmall.dts.admin.print.model.TextBoxElement;
 import com.casmall.dts.admin.print.rulers.ElementRuler;
 import com.casmall.dts.admin.print.rulers.ElementRulerProvider;
@@ -385,6 +386,11 @@ public class PrintWizardEditor extends GraphicalEditorWithFlyoutPalette {
 				new ElementCreationFactory(BoxElement.class),
 				ImageDescriptor.createFromFile(PrintWizardEditor.class, PrintConstants.IMG_BOX),
 				ImageDescriptor.createFromFile(PrintWizardEditor.class, PrintConstants.IMG_BOX_LARGE)));
+		
+		elementDrawer.add(new CreationToolEntry("QRCode", "QRCode를 생성합니다.",
+				new ElementCreationFactory(QRCodeElement.class),
+				ImageDescriptor.createFromFile(PrintWizardEditor.class, PrintConstants.IMG_QRCODE),
+				ImageDescriptor.createFromFile(PrintWizardEditor.class, PrintConstants.IMG_QRCODE_LARGE)));
 		
 		elementDrawer.add(new CreationToolEntry("라인", "라인을 생성합니다.",
 				new ElementCreationFactory(LineElement.class),
